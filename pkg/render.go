@@ -25,7 +25,7 @@ func RenderTemplate(w http.ResponseWriter, t string) {
 
 	var tmpl *template.Template
 	var err error
-	// check to see if the template has been updated
+	// check to see if the template has been updated .
 	_, inMap := tc[t]
 	if !inMap {
 		// need to create template
