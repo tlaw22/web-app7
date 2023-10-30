@@ -12,8 +12,11 @@ import (
 // RenderTemplate renders a template
 // This method taxes the server more because it has to read from disk, each time a user requests a page.
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
+
 	// create template cahce
-	tc, err := createTemplateCache()
+	// get the template cache from the appconfig
+
+	tc, err := CreateTemplateCache()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -41,7 +44,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string) {
 	}
 }
 
-func createTemplateCache() (map[string]*template.Template, error) {
+func CreateTemplateCache() (map[string]*template.Template, error) {
 	//	myCache := make(map[string]*template.Template)
 	myCache := map[string]*template.Template{}
 	// get all of the files named*,tmpl
