@@ -7,32 +7,29 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+	"go-web-app7/pkg"
 )
 
 // RenderTemplate renders a template
 // This method taxes the server more because it has to read from disk, each time a user requests a page.
+var app *pkg.AppConfig
+
+func NewTemplate(a *pkg.AppConfig) {
+	app = a
+}
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
+	tc := app.TemplateCache
 
-	// create template cahce
-	// get the template cache from the appconfig
-
-	tc, err := CreateTemplateCache()
-	if err != nil {
-		log.Fatal(err)
-	}
 	// get template from cashe
 	t, ok := tc[tmpl]
 	if !ok {
-		log.Fatal(err)
+		log.Fatal("Could not get template")
 	}
 	buf := new(bytes.Buffer)
-	err = t.Execute(buf, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
+	_ = t.Execute(buf, nil)
 
 	// render the template
-	_, err = buf.WriteTo(w)
+	_, err := buf.WriteTo(w)
 	if err != nil {
 		log.Fatal(err)
 	}

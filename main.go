@@ -19,6 +19,7 @@ func main() {
 	}
 
 	app.TemplateCache = tc
+	pkg.NewTemplate(&app)
 
 	http.HandleFunc("/", pkg.Home)
 	http.HandleFunc("/about", pkg.About)
