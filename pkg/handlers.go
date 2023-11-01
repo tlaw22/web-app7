@@ -26,11 +26,11 @@ func NewHandler(r *Repository) {
 }
 
 // Home is the handler for the home page
-func Home(w http.ResponseWriter, r *http.Request) {
+func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	RenderTemplate(w, "home.page.tmpl")
 }
 
 // About is the handler for the about page
-func About(w http.ResponseWriter, r *http.Request) {
+func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	RenderTemplate(w, "about.page.tmpl")
 }
