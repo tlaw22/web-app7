@@ -3,11 +3,11 @@ package pkg
 import (
 	"bytes"
 	"fmt"
+	"go-web-app7/pkg"
 	"html/template"
 	"log"
 	"net/http"
 	"path/filepath"
-	"go-web-app7/pkg"
 )
 
 // RenderTemplate renders a template

@@ -10,7 +10,7 @@ var Repo *Repository
 
 // is the repository type
 type Repository struct {
-	AppConfig *pkg.AppConfig
+	App *pkg.AppConfig
 }
 
 // NewRepo creates a new repository
@@ -21,7 +21,7 @@ func NewRepo(a *pkg.AppConfig) *Repository {
 }
 
 // NewHandlers sets the repository for the hundlers
-func NewHandler(r *pkg.AppConfig) http.Handler {
+func NewHandler(r *Repository) {
 	Repo = r
 }
 

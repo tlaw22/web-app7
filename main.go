@@ -19,6 +19,8 @@ func main() {
 	}
 
 	app.TemplateCache = tc
+	repo := pkg.NewRepo(&app)
+	pkg.NewHandler(repo)
 	pkg.NewTemplate(&app)
 
 	http.HandleFunc("/", pkg.Home)
