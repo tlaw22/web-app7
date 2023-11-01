@@ -17,9 +17,13 @@ var app *pkg.AppConfig
 func NewTemplate(a *pkg.AppConfig) {
 	app = a
 }
+var tc map[string]*template.Template
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
+	if app.TemplateCache == nil {
 	tc := app.TemplateCache
-
+	} else {
+		tc, _ = CreateTemplateCache()
+	}
 	// get template from cashe
 	t, ok := tc[tmpl]
 	if !ok {
