@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
-	"go-web-app7/pkg"
 	"log"
 	"net/http"
+	"web-app7/config"
+	"web-app7/handlers"
+	"web-app7/render"
 )
 
 const portNumber = ":8080"
@@ -12,21 +14,21 @@ const portNumber = ":8080"
 // main is the main function
 func main() {
 
-	var app pkg.AppConfig
-	tc, err := pkg.CreateTemplateCache()
-	
+	var app config.AppConfig
+	tc, err := render.CreateTemplateCache()
+
 	if err != nil {
 		log.Fatal("Cannot create template cache")
 	}
 
 	app.TemplateCache = tc
 	app.UseCache = false
-	repo := pkg.NewRepo(&app)
-	pkg.NewHandler(repo)
-	pkg.NewTemplate(&app)
+	repo := handlers.NewRepo(&app)
+	handlers.NewHandler(repo)
+	handlers.NewTemplate(&app)
 
-	http.HandleFunc("/", pkg.Repo.Home)
-	http.HandleFunc("/about", pkg.Repo.About)
+	http.HandleFunc("/", handlers.Repo.Home)
+	http.HandleFunc("/about", handlers.Repo.About)
 
 	fmt.Println(fmt.Sprintf("Staring application on port %s", portNumber))
 	_ = http.ListenAndServe(portNumber, nil)

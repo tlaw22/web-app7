@@ -1,26 +1,29 @@
-package pkg
+package render
 
 import (
 	"bytes"
 	"fmt"
-	"go-web-app7/pkg"
 	"html/template"
 	"log"
 	"net/http"
 	"path/filepath"
+	"web-app7/config"
 )
 
 // RenderTemplate renders a template
 // This method taxes the server more because it has to read from disk, each time a user requests a page.
-var app *pkg.AppConfig
+var app *config.AppConfig
 
-func NewTemplate(a *pkg.AppConfig) {
+func NewTemplate(a *config.AppConfig) {
 	app = a
 }
+
 var tc map[string]*template.Template
+
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
 	if app.TemplateCache == nil {
-	tc := app.TemplateCache
+		tc := app.TemplateCache
+		println(tc)
 	} else {
 		tc, _ = CreateTemplateCache()
 	}

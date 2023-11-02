@@ -1,8 +1,9 @@
-package pkg
+package handlers
 
 import (
-	"go-web-app7/pkg"
 	"net/http"
+	"web-app7/config"
+	"web-app7/render"
 )
 
 // the repository used by the handlers
@@ -10,11 +11,11 @@ var Repo *Repository
 
 // is the repository type
 type Repository struct {
-	App *pkg.AppConfig
+	App *config.AppConfig
 }
 
 // NewRepo creates a new repository
-func NewRepo(a *pkg.AppConfig) *Repository {
+func NewRepo(a *config.AppConfig) *Repository {
 	return &Repository{
 		App: a,
 	}
@@ -27,10 +28,10 @@ func NewHandler(r *Repository) {
 
 // Home is the handler for the home page
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	RenderTemplate(w, "home.page.tmpl")
+	render.RenderTemplate(w, "home.page.tmpl")
 }
 
 // About is the handler for the about page
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-	RenderTemplate(w, "about.page.tmpl")
+	render.RenderTemplate(w, "about.page.tmpl")
 }
