@@ -25,7 +25,7 @@ func main() {
 	app.UseCache = false
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandler(repo)
-	handlers.NewTemplate(&app)
+	// handlers.NewTemplate(&app)
 
 	http.HandleFunc("/", handlers.Repo.Home)
 	http.HandleFunc("/about", handlers.Repo.About)
